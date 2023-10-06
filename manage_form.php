@@ -47,7 +47,7 @@ if(isset($_GET['id'])){
 										<tr>
 										<th>Image</th>
 										<th>Signature</th>
-											<th>Name</th>
+											<th>User Name</th>
 											<th>Contact</th>
 											<th>Amount</th>
 											<th>Paid</th>
