@@ -4,6 +4,16 @@ error_reporting(0);
 include_once('dbconnect/dbconnection.php');
 date_default_timezone_set('Asia/calcutta');
 include_once('SimpleImage.php');
+
+if(isset($_GET['id']))
+{
+	$id=$_GET['id'];
+	$sql="select * from registration where id='$id'";
+	$result=mysql_query($sql);
+	$rs=mysql_fetch_array($result);
+	
+}
+
 if (isset($_POST['submit'])) {	
  $name = mysql_real_escape_string($_POST['name']);
  $email= mysql_real_escape_string($_POST['email']);
@@ -60,7 +70,8 @@ if (isset($_POST['submit'])) {
 		$query_run=mysql_query($sql) or die(mysql_error());
 		  
 		if($query_run){
-			  $message='Registration Successfull';
+			 $_SESSION['message']='Supplier Successfully Updated';
+			 header('Location: manage_form.php');  
 		  }
 	  }
 	  
@@ -206,11 +217,11 @@ $(document).ready(function(){
   <tr>  
     <td width="159"> <b> Enter your Name </b> </td>  
     <td width="218">  
-    <input type="text" placeholder="Enter name" name = "name" id="name" pattern="[a-z A-Z]*" required /> </td>  
+    <input type="text" placeholder="Enter name" name = "name" value="<?php echo $rs['name'];?>" id="name" pattern="[a-z A-Z]*" required /> </td>  
   </tr>  
   <tr>  
     <td> <b> Enter your Email </b> </td>  
-    <td> <input type="email" name="email" id="email"> <span style="color:red;" id="emailStatus"></span></td>  
+    <td> <input type="email" name="email" value="<?php echo $rs['email'];?>" id="email"> <span style="color:red;" id="emailStatus"></span></td>  
   </tr>  
   <tr>  
     <td> <b> Enter your Password </b> </td>  
@@ -259,21 +270,13 @@ $(document).ready(function(){
 </form>  
 </body>  
 </html>  
-<?php
-/*  
-extract($_POST);  
-if(isset($save))  
-{  
-$dob=$yy."-".$mm."--".$dd;  
-$h=implode(",",$hobb);  
-$img=$_FILES['pic']['name'];  
-if($return)  
-{  
-$msg="<font color='red'>".ucfirst($e)." already exists choose another email </font>";  
-}  
-else  
-{  
-$msg= "<font color='blue'> your data saved </font>";  
-}  
-}  
-*/ ?> 
+
+
+<!--<select class="form-control" name="by">
+							<option value="">-----SELECT-----</option>
+						   <option value="Cash"<?php //if($rs['by_check_cash']=='Cash'){echo 'selected';}?>>Cash</option>
+							<option value="Check"<?php //if($rs['by_check_cash']=='Check'){echo 'selected';}?>>Check</option>
+							<option value="D.D"<?php //if($rs['by_check_cash']=='D.D'){echo 'selected';}?>>D.D</option>
+			
+			
+</select>-->

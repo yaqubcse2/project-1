@@ -46,39 +46,20 @@ if(isset($_GET['id'])){
 									<thead>
 										<tr>
 										<th>Image</th>
-										<th>Signature</th>
-											<th>User Name</th>
-											<th>Contact</th>
-											<th>Amount</th>
-											<th>Paid</th>
-											<th>By</th>
-											<th>DD/Check No</th>
-											<th>Pending</th>
-											<th>Date</th>
+									    <th>User Name</th>
+										<th>Mobile</th>
+											
+											<th>Date Of Birth</th>
 											
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-										<th>Image</th>
-										<th>Signature</th>
-											<th>Name</th>
-											<th>Contact</th>
-											<th>Amount</th>
-											<th>Paid</th>
-											<th>By</th>
-											<th>DD/Check No</th>
-											<th>Pending</th>
-											<th>Date</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
+									
 									<tbody>
-									<?php $sql="select * from account_supplier order by id desc";$result=mysql_query($sql);
+									<?php $sql="select * from registration order by id desc";$result=mysql_query($sql);
 									while($rs=mysql_fetch_array($result)){?>
 										<tr>
-										<td width="13%">
+										<td>
 									<?php 
 									if($rs['image']!=""){ ?>
 									<img id="myImg" src="image_projects/midthumb/<?php echo $rs['image']; ?>" class="img img-responsive">
@@ -86,24 +67,12 @@ if(isset($_GET['id'])){
 									<img id="myImg" src="image_projects/midthumb/images.jpg" class="img img-responsive">
 									<?php } ?>	
 							</td>
-							<td width="13%">
-									<?php 
-									if($rs['images']!=""){ ?>
-									<img id="myImg" src="image_projects/midthumb/<?php echo $rs['images']; ?>" class="img img-responsive">
-									<?php } else { ?>
-									<img id="myImg" src="image_projects/midthumb/signature.png" class="img img-responsive">
-									<?php } ?>	
-							</td>
+							
 											<td><?php echo$rs['name'];?></td>
-											<td><?php echo$rs['contact'];?></td>
-											<td><?php echo$rs['amount'];?></td>
-											<td><?php echo$rs['paid'];?></td>
-											<td><?php echo$rs['by_check_cash'];?></td>
-											<td><?php echo$rs['dd_check_num'];?></td>
-											<td><?php echo$rs['pending'];?></td>
-											<td><?php echo date('d-M-Y',strtotime($rs['date']));?></td>
-											<td><a href="edit_account_sup.php?id=<?php echo$rs['id'];?>" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href="manage_acc_sup.php?id=<?php echo$rs['id'];?>" title="Delete" onclick="return confirm('Do You want to delete !');"><span class="glyphicon glyphicon-trash"></span></a>
+											<td><?php echo$rs['mobile'];?></td>
+											<td><?php echo date('d-M-Y',strtotime($rs['dateOfBirth']));?></td>
+											<td><a href="edit_registration_form.php?id=<?php echo $rs['id'];?>" title="Edit">Edit</a>
+											<a href="manage_form.php?id=<?php echo$rs['id'];?>" title="Delete" onclick="return confirm('Do You want to delete !');">Delete</a>
 											</td>
 										</tr>
 									<?php }?>	
